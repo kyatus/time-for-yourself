@@ -142,3 +142,24 @@ with tab3:
             </div>
         </div>""", unsafe_allow_html=True)
     else: st.write("データが蓄積されると、ここに心のバイオリズムグラフが描画されます。")
+# ─── 【バグ予防・対策済】Google AdMob 広告表示コード ───
+import streamlit as st
+import streamlit.components.v1 as components
+
+# 1. 広告の裏にボタンが隠れるのを防ぐための「空地（クッション）」をアプリの最下部に作る
+st.write("<div style='margin-bottom: 80px;'></div>", unsafe_allow_html=True)
+
+# 2. 広告を画面最下部に固定表示する（数字をご自身のAdMobのものに書き換えてください）
+admob_html = """
+<div style="text-align:center; position:fixed; bottom:0; left:0; width:100%; background:#FAF7F2; z-index:9999; padding: 5px 0; border-top: 1px solid #C8D0CB;">
+    <script async src="https://googlesyndication.com" crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:320px;height:50px"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+"""
+components.html(admob_html, height=65)
